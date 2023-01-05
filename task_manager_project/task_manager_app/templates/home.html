@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Home Page</title>
+{% endblock title %} 
+    
+
+{% block css %}
+
+{% endblock css %}
+
+{% block js %}
+
+{% endblock js %}
+
+{% block body %}
+
+
+<div class="container">
+    <div class="container text-center text-primary ">
+        <h1> TASK MANAGER </h1>
+    </div>
+    <div class="container text-center mt-5">
+        <h3>This Is Simple Application To Manage Your Day To Day Tasks.</h3>
+    </div>
+
+    <div>
+        <div class="row">
+            <div class="col-6 p-5">
+                <h5 class="p-5 text-danger"> One App to Make it all your work alligned and easy. </h5>
+
+                <div class="text-center">
+                    <a class="btn btn-success" href="{% url 'log_in' %}">Log in</a>
+                    <a class="btn btn-primary" href="">Register</a>
+                </div>
+
+            </div>
+            <div class="col-6 p-5">
+                <img src="static/images/task_img.webp" alt="No Image">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
+

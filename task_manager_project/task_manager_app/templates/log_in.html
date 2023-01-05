@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Log In Page</title>
+{% endblock title %}
+
+
+{% block css %}
+
+{% endblock css %}
+
+{% block js %}
+
+{% endblock js %}
+
+{% block body %}
+
+{% if messages %}
+
+    {% for msg in messages %}
+    <p {% if msg.tags %} class="p-3 alert-{{msg.tags}}"{% endif %} >{{msg}}</p>
+    {% endfor %}
+    
+{% endif %}
+
+<div class="container">
+
+    <div class="container text-center text-primary mt-5 ">
+        <h1 class="mb-4"> LOGIN PAGE </h1>
+    </div>
+    <div class="container">
+        <div>
+            <div class="row">
+                <div class="col-2">
+                </div>
+                <div class="col-8 border shadow p-5">
+                    <div>
+                        <form action="{% url 'log_in' %}" method="post">
+                            {% csrf_token %}
+            
+                            {% for fm in form %}
+                            {{fm.label}} {{fm}}
+            
+                            {% endfor %}
+            
+                            <div class="text-center mt-4">
+                                <button class="btn btn-success" type="submit">Log In</button>
+                                <button class="btn btn-danger" type="reset">Reset</button>
+                            </div>
+            
+                            <div class="text-center mt-5 mb-3">
+                                <a class="btb btn-primary p-2 text-decoration-none ps-5 pe-5 rounded" href="{% url 'home' %}">Back To Home</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-2">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock body %}
