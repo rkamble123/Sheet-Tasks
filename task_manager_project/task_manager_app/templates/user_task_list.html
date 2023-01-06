@@ -7,8 +7,6 @@
 
 {% block css %}
 
-
-
 {% endblock css %}
 
 {% block js %}
@@ -52,7 +50,7 @@
                                 <tbody>
                                     {% for d in data %}
                                   <tr>
-                                    <td><a style="font-family: cursive;" class="text-decoration-none" href="#">{{d.task_name}}</a></td>
+                                    <td><a style="font-family: cursive;" class="text-decoration-none" href="{% url 'task_details' d.id %}">{{d.task_name}}</a></td>
                                     <td>{{d.status}}</td>
                                   </tr>
                                   {% endfor %}

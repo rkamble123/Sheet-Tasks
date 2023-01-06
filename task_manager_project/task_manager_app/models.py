@@ -8,8 +8,15 @@ status_choices = [(0,'Started'),(1,'Pending'),(2,'Wroking'),(3,'Finished')]
 
 
 class TaskModel(models.Model):
+
+    class status_choices(models.IntegerChoices):
+        Not_started = 0,"not started"
+        Started = 1 ,"Strated"
+        Working = 2 ,"Working"
+        Done = 3,"Done"
+
     task_name = models.CharField(max_length=100)
-    status = models.IntegerField(choices = status_choices)
+    status = models.IntegerField(choices = status_choices.choices)
     owner_id = models.ForeignKey(User,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True,blank=True)
     updated_at = models.DateTimeField(auto_now_add=False,auto_now=True)

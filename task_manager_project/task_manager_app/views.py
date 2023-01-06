@@ -34,19 +34,40 @@ def log_in(request):
         return redirect('log_in')
                 
 
-@login_required
+@login_required(login_url='http://127.0.0.1:8000/log_in')
 def user_task_list(request):
     if request.method == "GET":
-        # if request.user.is_authenticated:
+        if request.user.is_authenticated:
             data = TaskModel.objects.filter(owner_id = request.user.id)
-            print(data)
             return render(request,'user_task_list.html',{'data':data})
+        messages.warning(request,"No Permission Login First !!!")
+        return redirect('log_in')
         
 
-
 def log_out(request):
+    # if request.method == "GET":        
+        logout(request)
+        messages.warning(request,'Logged Out Succesfully !!!')
+        return redirect('home')
+
+
+@login_required(login_url='http://127.0.0.1:8000/log_in')
+def task_details(request,pk):
     if request.method == "GET":
-        # if request.user.is_authenticated:
-            logout(request)
-            messages.warning(request,'Logged Out Succesfully !!!')
-            return redirect('home')
+        Task_data = TaskModel.objects.get(id=pk)
+        Sub_task_data = SubtaskModel.objects.filter(task_id = pk)
+        print(Sub_task_data)
+        return render(request,'task_details.html',{'Task_data':Task_data,'Sub_task_data':Sub_task_data})
+
+
+
+
+def add_subtask(request):
+    if request.method == 'POST':
+        sub_task = request.POST['sub_task_name']
+        main_task = request.POST['task_id']
+        print(sub_task)
+        main_task = int(main_task)
+        task = TaskModel.objects.get(id=4)
+        data = SubtaskModel.objects.create(sub_task_name=sub_task,task_id_id=int(main_task))
+        print(data)

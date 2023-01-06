@@ -9,3 +9,18 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username','password']
+
+
+class SubTaskForm(forms.ModelForm):
+
+    class Meta:
+        model = SubtaskModel
+        fields = ['sub_task_name','task_id']
+        label = {
+            'sub_task_name' : "Enter The Sub Task Name : ",
+        }
+
+        widgets = {
+            'sub_task_name' : forms.TextInput(attrs={'class':'form-control'}),
+            'task_id': forms.TextInput(attrs={'class':'form-control'})            
+        }
