@@ -9,7 +9,7 @@ urlpatterns = [
     path("log_out",views.log_out,name='log_out'),
     # path('accounts/',include('django.contrib.auth.urls'))
     path('task_details/<int:pk>',views.task_details,name='task_details'),
-    path('add_subtask/',views.add_subtask,name='add_subtask'),
+    # path('add_subtask/',views.add_subtask,name='add_subtask'),
 
 
 

@@ -58,16 +58,23 @@ def task_details(request,pk):
         Sub_task_data = SubtaskModel.objects.filter(task_id = pk)
         print(Sub_task_data)
         return render(request,'task_details.html',{'Task_data':Task_data,'Sub_task_data':Sub_task_data})
-
-
-
-
-def add_subtask(request):
     if request.method == 'POST':
+        print(pk)
         sub_task = request.POST['sub_task_name']
-        main_task = request.POST['task_id']
         print(sub_task)
-        main_task = int(main_task)
-        task = TaskModel.objects.get(id=4)
-        data = SubtaskModel.objects.create(sub_task_name=sub_task,task_id_id=int(main_task))
-        print(data)
+        # task = TaskModel.objects.get(id=pk)
+        data = SubtaskModel.objects.create(sub_task_name=sub_task,task_id_id=pk)
+        data.save()
+        Task_data = TaskModel.objects.get(id=pk)
+        Sub_task_data = SubtaskModel.objects.filter(task_id = pk)
+        print(Sub_task_data)
+        return render(request,'task_details.html',{'Task_data':Task_data,'Sub_task_data':Sub_task_data})
+
+
+def create_task(request):
+    if request.method == "GET":
+        pass
+
+
+
+

@@ -24,3 +24,22 @@ class SubTaskForm(forms.ModelForm):
             'sub_task_name' : forms.TextInput(attrs={'class':'form-control'}),
             'task_id': forms.TextInput(attrs={'class':'form-control'})            
         }
+
+
+# class TaskForm(forms.ModelForm):
+
+#     class Meta:
+#         model = TaskModel
+#         fields = ['task_name','status','owner']
+#         label = {
+#             'task_name': 'Task Name',
+#             'status' : 'Status',
+#             # 'owner':'Owner'
+#         }
+
+#         widgets = {
+
+#             'task_name' : forms.TextInput(attrs={'class':'form-control'}),
+#             'status' : forms.
+
+#         }

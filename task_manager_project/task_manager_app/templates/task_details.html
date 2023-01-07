@@ -63,12 +63,11 @@
                     </div>
                     
                     <div>
-                    <form action="{% url 'add_subtask' %}" method="post">
+                    <form action="{% url 'task_details' Task_data.id %}" method="post">
                         {% csrf_token %}
 
                         <div class="text-center">
                             <span class="fs-4" style="font-family: cursive;">Add Sub Task</span>
-
                         </div>
                         
                         <div class="p-3">
