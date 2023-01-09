@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Home Page</title>
+<title>Register User</title>
 {% endblock title %} 
     
 
@@ -28,9 +28,6 @@
     <div class="container text-center text-primary ">
         <h1> TASK MANAGER </h1>
     </div>
-    <div class="container text-center mt-5">
-        <h3>Create New Task</h3>
-    </div>
     <div class="mt-5">
         <div class="row">
             <div class="col-2">
@@ -40,11 +37,11 @@
                 <div class="card shadow p-5">
                     
                     <div>
-                    <form action="{% url 'create_task' %}" method="post">
+                    <form action="{% url 'register_user' %}" method="post">
                         {% csrf_token %}
 
                         <div class="text-center">
-                            <span class="fs-4" style="font-family: cursive;">Add Task</span>
+                            <span class="fs-4" style="font-family: cursive;">Add User</span>
                         </div>
                         
                         <div class="p-3">
@@ -52,7 +49,7 @@
                         </div>
 
                         <div class="text-center">
-                            <button class="btn btn-success">ADD + </button>
+                            <button class="btn btn-success">ADD USER + </button>
                         </div>
 
                     </form>

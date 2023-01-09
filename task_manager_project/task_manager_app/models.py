@@ -17,7 +17,7 @@ class TaskModel(models.Model):
 
     task_name = models.CharField(max_length=100)
     status = models.IntegerField(choices = status_choices.choices)
-    owner_id = models.ForeignKey(User,on_delete=models.CASCADE)
+    owner = models.ForeignKey(User,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True,blank=True)
     updated_at = models.DateTimeField(auto_now_add=False,auto_now=True)
     
@@ -27,7 +27,7 @@ class TaskModel(models.Model):
 
 class SubtaskModel(models.Model):
     sub_task_name = models.CharField(max_length=100)
-    task_id = models.ForeignKey(TaskModel,on_delete=models.CASCADE)
+    task = models.ForeignKey(TaskModel,on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

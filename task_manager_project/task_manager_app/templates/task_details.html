@@ -46,13 +46,15 @@
                     </div>
 
                     <div class="text-center mt-4">
-                        <a class="btn btn-danger m-2" href="">DELETE</a>
-                        <a class="btn btn-secondary m-2" href="">BACK</a>
+                        <a class="btn btn-danger m-2" href="{% url 'delete_task' Task_data.id %}">DELETE</a>
+                        <a class="btn btn-secondary m-2" href="{% url 'user_task_list' %}">BACK</a>
                     </div>
 
+                    {% if Sub_task_data %}
                     <div>
                         <span class="fs-4" style="font-family: cursive;">Sub Tasks :- </span>
                     </div>
+                    {% endif %}
 
                     <div>
                         <ol>
@@ -71,15 +73,10 @@
                         </div>
                         
                         <div class="p-3">
-                            <label class="form-group" for="sub_task_name">Enter Sub-Task Name : </label>
-                            <input class="form-control" type="text" name="sub_task_name" id="sub_task_name">
+                            {{form}}
                         </div>
-                        <div class="p-3 " style="display: none;" >
-                            <label class="form-group" for="task_id"> : </label>
-                            <input class="form-control" type="text" name="task_id" id="task_id" value="{{Task_data.id}}">
-                        </div>
-
-                    <div class="p-3">
+        
+                    <div class="p-3 text-center">
                         <button class="btn btn-success" type="submit">Add Subtask + </button>
                     </div>
                     </form>
