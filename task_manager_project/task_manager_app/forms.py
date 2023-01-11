@@ -23,7 +23,7 @@ class Registerform(UserCreationForm):
             'last_name':'Enter The Last Name ' ,
             'username' : 'Enter Username ',
             'email' : 'Enter The Email ',
-        }
+        }   
 
         widgets = {
             'first_name' : forms.TextInput(attrs={'class':'form-control'}),
@@ -45,24 +45,30 @@ class SubTaskForm(forms.ModelForm):
 
         widgets = {
             'sub_task_name' : forms.TextInput(attrs={'class':'form-control'}),
-            'task': forms.Select(attrs={'class':'form-control'})            
+            'task': forms.HiddenInput(attrs={'class':'form-control', })            
         }
 
 
 class TaskForm(forms.ModelForm):
 
+    def __init__(self, request, *args, **kwargs):
+        self.request = request
+        super().__init__(*args, **kwargs)
+
     class Meta:
         model = TaskModel
-        fields = ['task_name','status','owner']
+        fields = ['task_name','status']
         label = {
             'task_name': 'Task Name',
             'status' : 'Status',
-            'owner':'Owner'
         }
 
         widgets = {
-
             'task_name' : forms.TextInput(attrs={'class':'form-control'}),
             'status' : forms.Select(attrs={'class':'form-control'}),
-            'owner': forms.Select(attrs={'class':'form-control'})
         }
+
+    def save(self, commit=True):
+        self.instance.owner = self.request.user
+        return super().save(commit)
+

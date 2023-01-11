@@ -51,7 +51,7 @@
                                     {% for d in data %}
                                   <tr>
                                     <td><a style="font-family: cursive;" class="text-decoration-none" href="{% url 'task_details' d.id %}">{{d.task_name}}</a></td>
-                                    <td>{{d.status}}</td>
+                                    <td>{{d.get_status_display}}</td>
                                   </tr>
                                   {% endfor %}
                                 </tbody>
