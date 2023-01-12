@@ -6,11 +6,21 @@ from .models import TaskModel, SubtaskModel
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import SubTaskForm, TaskForm, Registerform
+from django.core.paginator import Paginator 
 
 # Create your views here.
 
 
-def home(request):
+def home(request,*args,**kwargs):
+    print(request.GET.get('user'))
+    print(request.GET.get('user2'))
+
+
+    # get_query_params = request.query_params.get('status',None)
+    # if get_query_params:
+    #     param = get_query_params
+    # param=''
+
     return render(request, "home.html")
 
 
@@ -49,13 +59,27 @@ def log_in(request):
         return redirect('log_in')
 
 
-@login_required(login_url='/log_in')
-def user_task_list(request):
-    print(request.headers)
+@login_required(login_url='http://127.0.0.1:8000/log_in')
+def user_task_list(request,*args,**kwargs):
+
+    # print(request.headers)
     if request.method == "GET":
         if request.user.is_authenticated:
             data = TaskModel.objects.filter(owner_id=request.user.id)
-            return render(request, 'user_task_list.html', {'data': data})
+
+            status = request.GET.get('status',None)
+            if status:
+                data = data.filter(status=status)
+
+            task_paginator = Paginator(data,5)
+            
+            page_no = request.GET.get('page_no',1)
+            
+            data = task_paginator.get_page(page_no)
+
+
+            task = TaskModel(request).StatusChoices
+            return render(request, 'user_task_list.html', {'data': data,'status_choice':task})
         messages.warning(request, "No Permission Login First !!!")
         return redirect('log_in')
 

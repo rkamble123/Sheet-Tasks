@@ -2,8 +2,8 @@
 
 {% block title %}
 <title>Task List Page</title>
-{% endblock title %} 
-    
+{% endblock title %}
+
 
 {% block css %}
 
@@ -17,17 +17,16 @@
 
 {% if messages %}
 
-    {% for msg in messages %}
-    <p {% if msg.tags %} class="p-3 alert-{{msg.tags}}"{% endif %} >{{msg}}</p>
-    {% endfor %}
-    
-{% endif %}
+{% for msg in messages %}
+<p {% if msg.tags %} class="p-3 alert-{{msg.tags}}" {% endif %}>{{msg}}</p>
+{% endfor %}
 
+{% endif %}
 
 <div class="container">
 
     <div class="container text-center text-primary mb-3 mt-5 shadow p-3">
-        <h1> TASK LIST  </h1>
+        <h1> TASK LIST </h1>
     </div>
 
     <div class="shadow p-5">
@@ -37,28 +36,51 @@
             <div class="col-8">
                 <div>
                     <div>
-                        <a class="btn btn-success" href="{% url 'create_task' %}">Create Task + </a>
+                        <div style="display: inline;">
+                            <a class="btn btn-success" href="{% url 'create_task' %}">Create Task + </a>
+                        </div>
+                        <div style="display: inline; text-align: end;">
+                            <form action="{% url 'user_task_list' %}?status='{{status}}'" method="get">
+                            <label for="status">Status Filter : </label>
+                            <select name="status" id="status">Status
+                                <option value="">Select</option>
+                                {% for status in status_choice %}
+                                <option value="{{status}}">{{status.label}}</option>
+                                {% endfor %}
+                            </select>
+                            <button class="btn btn-primary" type="submit">Filter</button>
+                        </form>
+                        </div>
                     </div>
-                        <div class="mb-3  p-2">
-                            <table class="table">
-                                <thead>
-                                  <tr>
+                    <div class="mb-3  p-2">
+                        <table class="table">
+                            <thead>
+                                <tr>
                                     <th scope="col">Task</th>
                                     <th scope="col">Status</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                    {% for d in data %}
-                                  <tr>
-                                    <td><a style="font-family: cursive;" class="text-decoration-none" href="{% url 'task_details' d.id %}">{{d.task_name}}</a></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <div class="text-center p-2"><h5>Page Number : {{data.number}}</h5></div>
+                                
+                                {% for d in data %}
+                                <tr>
+                                    <td><a style="font-family: cursive;" class="text-decoration-none"
+                                            href="{% url 'task_details' d.id %}">{{d.task_name}}</a></td>
                                     <td>{{d.get_status_display}}</td>
-                                  </tr>
-                                  {% endfor %}
-                                </tbody>
-                              </table>
-                        </div>
-                    
+
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
+            </div>
+            <div class="text-center">
+                <span class="m-5">{% if data.has_previous %} <a href="{% url 'user_task_list' %}?page_no={{data.previous_page_number}}">Previous Page</a>{% endif %}</span>
+                <span class="m-5">{% if data.has_next %} <a href="{% url 'user_task_list' %}?page_no={{data.next_page_number}}">Next Page</a>{% endif %}</span>
+
             </div>
             <div class="col-2">
             </div>
@@ -68,4 +90,3 @@
 </div>
 
 {% endblock body %}
-
