@@ -18,7 +18,7 @@
           <li class="nav-item me-2">
             <a class="nav-link active" aria-current="page" href="{% url 'about_us' %}">About Us</a>
           </li>
-          {% if user.authenticated %}
+          {% if user.is_authenticated %}
           <li class="nav-item me-2">
             <a class="nav-link active" aria-current="page" href="{% url 'log_out' %}">Log out</a>
           </li>

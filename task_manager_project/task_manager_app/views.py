@@ -67,9 +67,11 @@ def user_task_list(request,*args,**kwargs):
         if request.user.is_authenticated:
             data = TaskModel.objects.filter(owner_id=request.user.id)
 
-            status = request.GET.get('status',None)
-            if status:
-                data = data.filter(status=status)
+            status = request.GET.get('status')
+            print(status)
+            if status :
+                if status != 'None':
+                    data = data.filter(status=status)
 
             task_paginator = Paginator(data,5)
             
@@ -77,9 +79,8 @@ def user_task_list(request,*args,**kwargs):
             
             data = task_paginator.get_page(page_no)
 
-
             task = TaskModel(request).StatusChoices
-            return render(request, 'user_task_list.html', {'data': data,'status_choice':task})
+            return render(request, 'user_task_list.html', {'data': data,'status_choice':task,'status':status})
         messages.warning(request, "No Permission Login First !!!")
         return redirect('log_in')
 

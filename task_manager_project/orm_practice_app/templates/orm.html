@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORM</title>
+</head>
+
+<body>
+
+    {% if data %}
+    {% for d in data %}
+    <div style="display: inline-block; margin: 80px;">
+        <div>{{d.employee_id}}</div>
+        <div>{{d.employee_name}}</div>
+        <div>{{d.join_date}}</div>
+        <div>{{d.salary_date}}</div>
+        <div>{{d.salary}}</div>
+        <div>{{d.employee_email}}</div>
+        <div style="margin-top: 50px;"><img src="{{d.employee_image.url}}" alt="No Image" height="200"></div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+
+
+</body>
+
+</html>

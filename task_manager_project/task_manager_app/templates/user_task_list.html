@@ -78,8 +78,16 @@
                 </div>
             </div>
             <div class="text-center">
-                <span class="m-5">{% if data.has_previous %} <a href="{% url 'user_task_list' %}?page_no={{data.previous_page_number}}">Previous Page</a>{% endif %}</span>
-                <span class="m-5">{% if data.has_next %} <a href="{% url 'user_task_list' %}?page_no={{data.next_page_number}}">Next Page</a>{% endif %}</span>
+                <span class="m-1">
+                    {% if data.has_previous %} 
+                    <a href="{% url 'user_task_list' %}?page_no={{data.previous_page_number}}&status={{status}}">Previous Page</a> &nbsp;&nbsp;||
+                    {% endif %}
+                </span>
+                <span class="m-1">
+                    {% if data.has_next %}
+                    <a href="{% url 'user_task_list' %}?page_no={{data.next_page_number}}&status={{status}}">Next Page</a>
+                    {% endif %}
+                </span>
 
             </div>
             <div class="col-2">
