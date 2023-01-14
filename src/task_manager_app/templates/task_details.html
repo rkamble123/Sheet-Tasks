@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Home Page</title>
+{% endblock title %}
+
+
+{% block css %}
+
+{% endblock css %}
+
+{% block js %}
+
+{% endblock js %}
+
+{% block body %}
+
+
+<div class="container">
+    <div class="container text-center text-primary pt-4">
+        <h1> TASK DETAILS </h1>
+    </div>
+
+    <div class="mt-5">
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-8">
+
+
+                <div class="card shadow p-5">
+
+                    <div>
+                        <span class="fs-4" style="font-family: cursive;">Task ID :- </span> <span
+                            class="fs-5">{{Task_data.id}}</span>
+                    </div>
+
+                    <div>
+                        <span class="fs-4" style="font-family: cursive;">Task Name :- </span> <span
+                            class="fs-5">{{Task_data.task_name}}</span>
+                    </div>
+
+                    <div>
+                        <span class="fs-4" style="font-family: cursive;">Task Status :- </span> <span
+                            class="fs-5">{{Task_data.status}}</span>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a class="btn btn-danger m-2" href="{% url 'delete_task' Task_data.id %}">DELETE</a>
+                        <a class="btn btn-secondary m-2" href="{% url 'user_task_list' %}">BACK</a>
+                    </div>
+
+                    {% if Sub_task_data %}
+                    <div>
+                        <span class="fs-4" style="font-family: cursive;">Sub Tasks :- </span>
+                    </div>
+                    {% endif %}
+
+                    <div>
+                        <ol>
+                            {% for s_task in Sub_task_data %}
+                            <li>{{s_task.sub_task_name}}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                    
+                    <div>
+                    <form action="{% url 'task_details' Task_data.id %}" method="post">
+                        {% csrf_token %}
+
+                        <div class="text-center">
+                            <span class="fs-4" style="font-family: cursive;">Add Sub Task</span>
+                        </div>
+                        
+                        <div class="p-3">
+                            {{form}}
+                        </div>
+        
+                    <div class="p-3 text-center">
+                        <button class="btn btn-success" type="submit">Add Subtask + </button>
+                    </div>
+                    </form>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock body %}
