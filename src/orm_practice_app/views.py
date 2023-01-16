@@ -30,7 +30,7 @@ prefetch_related()
 '''
 from orm_practice_app.models import Employee, ForeignProject, ManyToManyProject
 from django.db.models import Avg, Count, Max, Min
-
+from django.core.cache import cache
 # Create your views here.
 
 def home(request):
@@ -142,9 +142,10 @@ def home(request):
 
     # select_related
 
-    # data = ForeignProject.objects.select_related()
-    # for i in data:
-    #     print(i.Employee_assigned.salary_date)
+    # if data is None:
+    #     data = ForeignProject.objects.select_related()
+    #     for i in data:
+    #         print(i.Employee_assigned.salary_date)
 
 
     # Prefetch_related
@@ -158,13 +159,32 @@ def home(request):
 
     # for i in data:
     #     print(i.foreignproject_set.all())
+    # data = Employee.objects.prefetch_related("foreignproject_set")
 
-     
-    data = Employee.objects.prefetch_related()
-    for i in data:
-        projects = i.foreignproject_set.all()
-        print(projects[0])
-        break
+
+
+    # data = cache.get("PROJECTS_DATA")
+    # if data is None:
+    #     data = Employee.objects.prefetch_related("foreignproject_set")
+    #     cache.set("PROJECTS_DATA", data)
+
+    # for i in data:
+    #     projects = i.foreignproject_set.all()
+    #     print(projects[0])
+    #     break
+
+
+
+    # cache
+
+    data= cache.get('project')
+    if data is None:
+        data = ForeignProject.objects.select_related()
+        cache.set('project',data,15)
+        for i in data:
+            print(i.Employee_assigned.salary_date)
+
+
 
 
     return render(request,'orm.html',{'data':data})

@@ -29,7 +29,7 @@ class SubtaskModel(models.Model):
     sub_task_name = models.CharField(max_length=100)
     task = models.ForeignKey(TaskModel,on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
-
+ 
     def __str__(self):
         return f'{self.task_id} {self.sub_task_name}'
 

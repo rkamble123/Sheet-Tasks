@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+import requests
 from .forms import LoginForm
 from django.contrib.auth import login, logout, authenticate
 from .models import TaskModel, SubtaskModel
@@ -128,7 +129,7 @@ def create_task(request):
         return render(request, 'create_task.html', {'form': form})
     if request.method == 'POST':
         form = TaskForm(request, request.POST)
-        if form.is_valid():
+        if form.is_valid(): 
             form.save()
             return redirect('user_task_list')
 
@@ -148,3 +149,57 @@ def about_us(request):
 
 def contact_us(request):
     return render(request, 'contact_us.html')
+
+def users_list(request):
+    url = "https://reqres.in/api/users"
+    response = requests.get(url=url)
+    if response.status_code == 200 or response.status_code == 201:
+
+        # All Users list page vise 
+
+        # r = requests.get('https://reqres.in/api/users?page=1')
+        # print(r.status_code)
+        # data = r.json()
+        # return render(request, "index.html",{'data':data})
+
+
+
+        #  single user data 
+
+        # r= requests.get('https://reqres.in/api/users/4')
+
+        # data = r.json()
+        # return render(request,'index.html',{'data':data})
+
+
+
+        # create user data
+
+        # r = requests.post('https://reqres.in/api/users',{'name':'rohan','job':'leader'})
+
+        # data = r.json()
+        # return render(request,'index.html',{'data':data})
+    
+
+
+    # update user data using put
+ 
+        # r = requests.put('https://reqres.in/api/users/89',{'name':'rohan','job':'Zone Head'})
+
+        # data = r.json()
+        # return render(request,'index.html',{'data':data})
+
+
+    
+    # update user data using patch
+ 
+        # r = requests.patch('https://reqres.in/api/users/89',{'name':'Rohan','job':'Zone Head'})
+
+        # data = r.json()
+        # return render(request,'index.html',{'data':data})
+
+
+        pass
+
+
+
