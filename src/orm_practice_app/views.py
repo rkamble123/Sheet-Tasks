@@ -48,6 +48,7 @@ def home(request):
     #exclude
     # data = data.exclude(employee_id=102)
 
+
     # anonate
 
 
@@ -177,14 +178,27 @@ def home(request):
 
     # cache
 
-    data= cache.get('project')
-    if data is None:
-        data = ForeignProject.objects.select_related()
-        cache.set('project',data,15)
-        for i in data:
-            print(i.Employee_assigned.salary_date)
+    # data= cache.get('project')
+    # if data is None:
+    #     data = ForeignProject.objects.select_related()
+    #     cache.set('project',data,15)
+    #     for i in data:
+    #         print(i.Employee_assigned.salary_date)
 
 
+
+    # data = Employee.objects.all()
+
+    # data = Employee.objects.filter(employee_name__    iexact = 'Rohan')
+    # data = Employee.objects.filter(employee_name__exact = 'Rohan')
+    # data = Employee.objects.filter(employee_name__contains = 's')
+    # data = Employee.objects.filter(employee_name__icontains = 's')
+    # data = Employee.objects.filter(employee_name__in = ['Rohan','Om'])
+
+
+
+    data = Employee.objects.aggregate(Count('employee_name'))
+    print(data)
 
 
     return render(request,'orm.html',{'data':data})

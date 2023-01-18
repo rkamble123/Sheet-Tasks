@@ -45,7 +45,7 @@ class SubTaskForm(forms.ModelForm):
 
         widgets = {
             'sub_task_name' : forms.TextInput(attrs={'class':'form-control'}),
-            'task': forms.HiddenInput(attrs={'class':'form-control', })            
+            'task': forms.HiddenInput(attrs={'class':'form-control', })     
         }
 
 

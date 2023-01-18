@@ -46,6 +46,7 @@
                     </div>
 
                     <div class="text-center mt-4">
+                        <a class="btn btn-primary m-2" href="{% url 'edit_task' Task_data.id %}">EDIT</a>
                         <a class="btn btn-danger m-2" href="{% url 'delete_task' Task_data.id %}">DELETE</a>
                         <a class="btn btn-secondary m-2" href="{% url 'user_task_list' %}">BACK</a>
                     </div>

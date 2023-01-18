@@ -134,6 +134,24 @@ def create_task(request):
             return redirect('user_task_list')
 
 
+
+@login_required(login_url='./home')
+def edit_task(request,pk):
+    data = TaskModel.objects.get(id=pk)
+    if request.method == 'POST':
+        new_task_name = request.POST['task_name']
+        new_status = request.POST['status']
+        data.task_name=new_task_name
+        data.status = new_status
+        data.save()
+        return redirect('task_details',pk)
+
+    data = TaskModel.objects.get(id=pk)
+    status = TaskModel(request).StatusChoices
+    return render(request,'edit_task.html',{'data':data,'status':status})
+
+
+
 def delete_task(request, pk):
     if request.method == "GET":
         data = TaskModel.objects.get(id=pk)
